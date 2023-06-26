@@ -2,6 +2,9 @@ package com.devsuperior.domainmodelorm.entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_activity")
 public class Activity {
@@ -19,6 +22,9 @@ public class Activity {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(mappedBy = "activity")
+    private List<Block> blocks = new ArrayList<>();
 
     public Activity(){
 
@@ -60,5 +66,17 @@ public class Activity {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public List<Block> getBlocks() {
+        return blocks;
     }
 }
