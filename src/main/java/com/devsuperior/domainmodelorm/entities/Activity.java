@@ -15,6 +15,11 @@ public class Activity {
     private String description;
     private Double price;
 
+    // FK
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
     public Activity(){
 
     }
