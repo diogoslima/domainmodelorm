@@ -3,7 +3,9 @@ package com.devsuperior.domainmodelorm.entities;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "tb_activity")
@@ -25,6 +27,13 @@ public class Activity {
 
     @OneToMany(mappedBy = "activity")
     private List<Block> blocks = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(name = "tb_activity_participant",
+        joinColumns = @JoinColumn(name = "activity_id"),
+        inverseJoinColumns = @JoinColumn(name = "participant_id"))
+    private Set<Participant> participants = new HashSet<>();
+
 
     public Activity(){
 
@@ -78,5 +87,9 @@ public class Activity {
 
     public List<Block> getBlocks() {
         return blocks;
+    }
+
+    public Set<Participant> getParticipants() {
+        return participants;
     }
 }
